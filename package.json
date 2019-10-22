@@ -1,6 +1,6 @@
 {
-  "name": "dp-clients",
-  "version": "1.0.0",
+  "name": "kpipe-streams",
+  "version": "0.9.1",
   "description": "Producers and Consumers for NoviSci Kafka datapipe",
   "main": "index.js",
   "scripts": {
