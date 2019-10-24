@@ -1,4 +1,4 @@
-# `kafka-streams`
+# `kpipe-streams`
 
 ## Stream Types
 

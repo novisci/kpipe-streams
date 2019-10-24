@@ -52,24 +52,16 @@ module.exports = function (options) {
 
     const ret = current.write(chunk, enc)
 
-    if (ret) {
-      // if (count++ % 10 === 0) {
-      //   process.stderr.write('.')
-      // }
-
-      if (fnBound(state, chunk)) {
-        // console.debug('end stream')
-        _flush(() => {
-          index += 1
-          // console.debug('next stream')
-          current = fnStream(index)
-          cb()
-        })
-        return true
-      }
-      cb()
-      return true
-    } else {
+    if (fnBound(state, chunk)) {
+      // console.debug('end stream')
+      _flush(() => {
+        index += 1
+        // console.debug('next stream')
+        current = fnStream(index)
+        cb()
+      })
+      return false
+    } else if (!ret) {
       paused = true
       // console.debug('paused')
       current.once('drain', () => {
@@ -79,6 +71,9 @@ module.exports = function (options) {
       })
       return false
     }
+
+    cb()
+    return true
   }
 
   const stream = new Writable({

@@ -1,6 +1,6 @@
 {
   "name": "kpipe-streams",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "description": "Producers and Consumers for NoviSci Kafka datapipe",
   "main": "index.js",
   "scripts": {
