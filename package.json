@@ -1,7 +1,7 @@
 {
   "name": "kpipe-streams",
   "version": "0.9.3",
-  "description": "Producers and Consumers for NoviSci Kafka datapipe",
+  "description": "Multiplexed and Transform streams for kpipe pipelines",
   "main": "index.js",
   "scripts": {
     "dev": "./bin/devcluster.sh",
