@@ -1,6 +1,6 @@
 {
   "name": "kpipe-streams",
-  "version": "0.9.5",
+  "version": "0.9.6",
   "description": "Multiplexed and Transform streams for kpipe pipelines",
   "main": "index.js",
   "scripts": {

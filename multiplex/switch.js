@@ -3,12 +3,12 @@
  *  and routes the supplied message to the indicated topic. The switch will manage the streams required
  *  to post to the topics provided. It will lazily create streams as needed to supply the topics.
  */
-module.exports = function ({ producerOpts } = {}) {
+module.exports = function ({ ...writerOpts } = {}) {
   const _topics = {}
   const _writer = require('kpipe-core').Writer({
     type: 'kafka',
-    brokers: process.env.DPIPE_BROKERS,
-    ...producerOpts
+    brokers: process.env.KPIPE_BROKERS,
+    ...writerOpts
   })
 
   function _topic (t) {
