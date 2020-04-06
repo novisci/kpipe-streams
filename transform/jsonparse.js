@@ -1,7 +1,7 @@
 const { Transform } = require('stream')
 
-module.exports = function (options) {
-  options = options || {}
+module.exports = function ({ ignoreErrors } = {}) {
+  ignoreErrors = typeof ignoreErrors !== 'undefined' ? !!ignoreErrors : false
 
   console.info(`TRANSFORM JSONparse`)
 
@@ -15,7 +15,10 @@ module.exports = function (options) {
         obj = JSON.parse(chunk)
       } catch (err) {
         obj = null
-        return cb(err)
+        if (!ignoreErrors) {
+          return cb(err)
+        }
+        console.error('ERROR: Skipping Invalid JSON --> ' + chunk)
       }
       cb(null, obj)
     }

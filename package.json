@@ -1,6 +1,6 @@
 {
   "name": "kpipe-streams",
-  "version": "0.9.6",
+  "version": "0.9.7",
   "description": "Multiplexed and Transform streams for kpipe pipelines",
   "main": "index.js",
   "scripts": {
@@ -18,7 +18,7 @@
     "eslint-plugin-node": "^9.1.0",
     "eslint-plugin-promise": "^4.1.1",
     "eslint-plugin-standard": "^4.0.0",
-    "jest": "^24.9.0"
+    "jest": "^25.2.7"
   },
   "dependencies": {
     "bl": "^1.0.0",
