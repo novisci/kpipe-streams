@@ -3,7 +3,7 @@ const { Transform } = require('stream')
 module.exports = function ({ ignoreErrors } = {}) {
   ignoreErrors = typeof ignoreErrors !== 'undefined' ? !!ignoreErrors : false
 
-  console.info(`TRANSFORM JSONparse`)
+  console.info('TRANSFORM JSONParse')
 
   return new Transform({
     readableObjectMode: true,

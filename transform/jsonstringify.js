@@ -3,7 +3,7 @@ const { Transform } = require('stream')
 module.exports = function (options) {
   options = options || {}
 
-  console.info(`TRANSFORM JSONstringify`)
+  console.info('TRANSFORM JSONStringify')
 
   return new Transform({
     readableObjectMode: false,
