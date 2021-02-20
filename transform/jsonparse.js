@@ -16,9 +16,10 @@ module.exports = function ({ ignoreErrors } = {}) {
       } catch (err) {
         obj = null
         if (!ignoreErrors) {
+          console.error('ERROR: Invalid JSON --> ' + chunk)
           return cb(err)
         }
-        console.error('ERROR: Skipping Invalid JSON --> ' + chunk)
+        console.error('WARNING: Skipping Invalid JSON --> ' + chunk)
       }
       cb(null, obj)
     }
