@@ -6,7 +6,7 @@ module.exports = function ({ ignoreErrors } = {}) {
   console.info('TRANSFORM JSONParse')
 
   return new Transform({
-    objectMode: false,
+    objectMode: true,
 
     transform: (chunk, enc, cb) => {
       let obj
