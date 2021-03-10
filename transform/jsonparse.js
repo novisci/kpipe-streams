@@ -6,8 +6,7 @@ module.exports = function ({ ignoreErrors } = {}) {
   console.info('TRANSFORM JSONParse')
 
   return new Transform({
-    readableObjectMode: true,
-    writableObjectMode: false,
+    objectMode: false,
 
     transform: (chunk, enc, cb) => {
       let obj
