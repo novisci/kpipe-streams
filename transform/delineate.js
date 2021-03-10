@@ -11,8 +11,8 @@ module.exports = function (options) {
   console.info(`TRANSFORM delineate`)
 
   const stream = new Transform({
-    writableObjectMode: false,
-    readableObjectMode: true,
+    writableObjectMode: false, // Reads buffers
+    readableObjectMode: true, // Writes string objects (single lines)
 
     transform: (chunk, enc, cb) => {
       // console.debug(chunk.toString())
