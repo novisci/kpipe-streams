@@ -71,10 +71,10 @@ module.exports = function ({ lineateBufferSize } = {}) {
     readableObjectMode: false, // Writes buffers
 
     transform: (chunk, enc, cb) => {
-      if (typeof chunk !== 'string') {
-        cb(Error(`Lineate chunks must be strings. Received ${typeof chunk}`))
+      if (typeof chunk !== 'string' && !Buffer.isBuffer(chunk)) {
+        cb(Error(`Lineate chunks must be strings or buffers. Received ${typeof chunk}`))
       }
-      addStringToBuffer(chunk + '\n', enc) // Add a newline to incoming strings
+      addStringToBuffer(chunk.toString() + '\n', enc) // Add a newline to incoming strings
       cb()
     },
     flush: (cb) => {
