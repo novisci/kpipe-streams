@@ -61,7 +61,7 @@ module.exports = function ({ lineateBufferSize } = {}) {
 
   function flushBuffer () {
     console.debug('Flushing lineate buffer')
-    stream.push(buffer.slice(0, bufferIdx))
+    stream.push(Buffer.from(buffer.slice(0, bufferIdx).toString()))
     buffer = null
     bufferIdx = 0
   }

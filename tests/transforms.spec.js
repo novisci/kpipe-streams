@@ -1,4 +1,4 @@
-const { Readable, Transform } = require('stream')
+const { Readable, Transform, Writable } = require('stream')
 const ppipe = require('util').promisify(require('stream').pipeline)
 
 test('transform/delineate splits strings on newlines', async () => {
@@ -20,9 +20,9 @@ boundaries.`
   await ppipe(
     stream,
     require('..').Transform.Delineate(),
-    new Transform({
+    new Writable({
       objectMode: false,
-      transform: (chunk, enc, cb) => {
+      write: (chunk, enc, cb) => {
         lines.push(chunk)
         cb(null, chunk)
       }
@@ -58,20 +58,20 @@ test('transform/lineate adds newlines to string chunks', async () => {
   await ppipe(
     stream,
     require('..').Transform.Lineate(),
-    new Transform({
+    new Writable({
       objectMode: false,
-      transform: (chunk, enc, cb) => {
+      write: (chunk, enc, cb) => {
         lines.push(chunk)
         cb(null, chunk)
       }
     })
   )
 
-  // Should create 5 chunks
-  expect(lines.length).toBe(5)
+  // Should create 1 chunks (returns a buffer with lines concatenated)
+  expect(lines.length).toBe(1)
 
   // Each chunk should be equivalent to strings[n] + '\n'
-  lines.map((l, i) => expect(l.toString()).toBe(strings[i] + '\n'))
+  expect(lines[0].equals(Buffer.from(strings.join('\n') + '\n'))).toBe(true)
 })
 
 test('transform/jsonparse converts json strings to objects', async () => {

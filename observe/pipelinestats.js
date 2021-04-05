@@ -63,7 +63,7 @@ module.exports = function ({ intervalMs, objectMode, label } = {}) {
     stats = statsInit()
   }
 
-  let reportHandle = setInterval(() => report(), reportInterval)
+  let reportHandle = null
 
   const stream = new (require('stream').Transform)({
     objectMode,
@@ -72,18 +72,27 @@ module.exports = function ({ intervalMs, objectMode, label } = {}) {
       if (Buffer.isBuffer(chunk) || typeof chunk === 'string') {
         stats.bytes += chunk.length
       }
+      // Don't start reporting until data arrives
+      if (reportHandle === null) {
+        reportHandle = setInterval(() => report(), reportInterval)
+      }
       cb(null, chunk)
     },
     flush: (cb) => {
-      clearInterval(reportHandle)
-      reportHandle = null
+      if (reportHandle !== null) {
+        clearInterval(reportHandle)
+        reportHandle = null
+      }
       report()
       // summary()
       cb()
     }
   })
   stream.on('close', (e) => {
-    clearInterval(reportHandle)
+    if (reportHandle !== null) {
+      clearInterval(reportHandle)
+      reportHandle = null
+    }
   })
 
   return stream
